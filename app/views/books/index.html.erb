@@ -2,6 +2,10 @@
 
 <% @books.each do |book| %>
 
+  <div>
+    <%= flash[:destroy] %>
+  </div>
+  
   <p>Title</p>
   <span>
     <%= book.title %>
@@ -14,8 +18,9 @@
   
 <%= link_to 'Show', book_path(book.id) %>
 <%= link_to 'edit', edit_book_path(book.id) %>
-<%= link_to 'Destroy',book_path(book.id), method: :delete %>
-  
+<%= form_with url: book_path(book.id), method: :delete, "data-confirm" => "Are you sure?" do |f| %>
+  <%= f.submit 'Destroy' %>
+<% end %>
 
 <% end %>
 
